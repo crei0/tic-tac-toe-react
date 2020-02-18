@@ -12,7 +12,7 @@ class BoardCell extends React.Component {
       y
     } = this.props;
 
-    this.props.clickHandler(y, x);
+    this.props.clickHandler(x, y);
   }
 
   render() {
@@ -22,12 +22,12 @@ class BoardCell extends React.Component {
 
     console.info("BoardCell", value !== '-')
     return (
-      <div className="col-sm">
+      <div className="col-sm tic-tac-toe__board-cell">
         <button 
           onClick={this.handleClick}
           disabled={value !== '-'}
           type="button"
-          className="btn btn-light">
+          className="btn btn-light btn-lg btn-block">
           {value}
         </button>
       </div>
@@ -47,7 +47,7 @@ BoardCell.propTypes = {
   y: PropTypes.number.isRequired,
   
   /**
-   * Can be "" (empty), 'x', 'o'
+   * Can be "-" (empty), 'X', 'O'
    */
   value: PropTypes.string.isRequired,
 
