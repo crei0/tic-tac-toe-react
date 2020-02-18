@@ -20,7 +20,6 @@ class BoardCell extends React.Component {
       value
     } = this.props;
 
-    console.info("BoardCell", value !== '-')
     return (
       <div className="col-sm tic-tac-toe__board-cell">
         <button 
