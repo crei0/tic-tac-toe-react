@@ -94,7 +94,7 @@ class Board extends React.Component {
     let message = '';
     switch (gameState) {
       case GAME_STATE.PLAYER_WON:
-        message = `${currentPlayer} WON`;
+        message = `The player '${currentPlayer}' WON`;
         break;
 
       case GAME_STATE.TIE:
@@ -102,7 +102,7 @@ class Board extends React.Component {
         break;
 
       default:
-        message = `The current player is ${currentPlayer}`;
+        message = `The current player is '${currentPlayer}'`;
         break;
     }
 
