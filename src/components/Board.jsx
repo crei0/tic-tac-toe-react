@@ -5,11 +5,7 @@ import BoardCell from './BoardCell';
 
 class Board extends React.Component {
   state = {
-    grid: [
-      [CELL_VALUES.EMPTY,  CELL_VALUES.EMPTY,   CELL_VALUES.EMPTY],
-      [CELL_VALUES.EMPTY,  CELL_VALUES.PLAYER_X,  CELL_VALUES.PLAYER_O],
-      [CELL_VALUES.PLAYER_X, CELL_VALUES.PLAYER_O,  CELL_VALUES.PLAYER_O]
-    ],
+    grid: [],
     currentPlayer: "x",
     score: {
       playerX: 0,
@@ -17,48 +13,49 @@ class Board extends React.Component {
     }
   };
 
+  componentDidMount() {
+    this.resetGrid();
+  }
+
+  resetGrid = () => {
+    this.setState({
+      grid: [
+        [CELL_VALUES.EMPTY,  CELL_VALUES.EMPTY,   CELL_VALUES.EMPTY],
+        [CELL_VALUES.EMPTY,  CELL_VALUES.EMPTY,   CELL_VALUES.EMPTY],
+        [CELL_VALUES.EMPTY,  CELL_VALUES.EMPTY,   CELL_VALUES.EMPTY]
+      ]
+    });
+  }
+
   handleClick = (x, y) => {
     console.info("Board handleClick", y, x);
   };
+
+  renderBoardStructure = (grid, clickHandler) => {
+    return grid.map((row, rowIndex) =>
+      <div className="row" key={`row-${rowIndex}`}>
+        { row.map((value, columnIndex) =>
+          <div key={`cell-${rowIndex}-${columnIndex}`}>
+            <BoardCell
+              y={rowIndex}
+              x={columnIndex}
+              value={value}
+              clickHandler={this.handleClick}
+            />
+          </div>
+        )}
+      </div>
+    )
+  };
   
   render() {
+    const {
+      grid
+    } = this.state;
+
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-sm">
-            <BoardCell y={0} x={0} value="-" clickHandler={this.handleClick} />
-          </div>
-          <div className="col-sm">
-            <BoardCell y={0} x={1} value="-" clickHandler={this.handleClick} />
-          </div>
-          <div className="col-sm">
-            <BoardCell y={0} x={2} value="-" clickHandler={this.handleClick} />
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-sm">
-            <BoardCell y={1} x={0} value="-" clickHandler={this.handleClick} />
-          </div>
-          <div className="col-sm">
-            <BoardCell y={1} x={1} value="-" clickHandler={this.handleClick} />
-          </div>
-          <div className="col-sm">
-            <BoardCell y={1} x={2} value="-" clickHandler={this.handleClick} />
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-sm">
-            <BoardCell y={2} x={0} value="-" clickHandler={this.handleClick} />
-          </div>
-          <div className="col-sm">
-            <BoardCell y={2} x={1} value="-" clickHandler={this.handleClick} />
-          </div>
-          <div className="col-sm">
-            <BoardCell y={2} x={2} value="-" clickHandler={this.handleClick} />
-          </div>
-        </div>
+        { this.renderBoardStructure(grid) }
       </div>
     );
   }

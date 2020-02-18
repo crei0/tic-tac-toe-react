@@ -4,38 +4,27 @@ import PropTypes from 'prop-types';
 /**
  * Board's cell
  */
-class BoardCell extends React.Component {
-
-  handleClick = () => {
-    const {
-      x,
-      y
-    } = this.props;
-
-    this.props.clickHandler(y, x);
-  }
+class BoardRow extends React.Component {
 
   render() {
     const {
       value
     } = this.props;
 
-    console.info("BoardCell", value !== '-')
+    console.info("BoardRow", value !== '-')
     return (
-      <div className="col-sm">
-        <button 
-          onClick={this.handleClick}
-          disabled={value !== '-'}
-          type="button"
-          className="btn btn-light">
-          {value}
-        </button>
-      </div>
+      <button 
+        onClick={this.handleClick}
+        disabled={value !== '-'}
+        type="button"
+        className="btn btn-light">
+        {value}
+      </button>
     );
   }
 }
 
-BoardCell.propTypes = {
+BoardRow.propTypes = {
   /**
    * The X-axis (horizontal) position
    */
@@ -57,4 +46,4 @@ BoardCell.propTypes = {
   clickHandler: PropTypes.func.isRequired
 };
 
-export default BoardCell;
+export default BoardRow;
