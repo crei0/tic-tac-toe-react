@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { CELL_VALUES } from '../enums/board';
 
 /**
  * Board's cell
@@ -24,9 +25,9 @@ class BoardCell extends React.Component {
       <div className="col-sm tic-tac-toe__board-cell">
         <button 
           onClick={this.handleClick}
-          disabled={value !== '-'}
+          disabled={value !== CELL_VALUES.EMPTY}
           type="button"
-          className="btn btn-light btn-lg btn-block">
+          className="btn btn-info btn-lg btn-block">
           {value}
         </button>
       </div>

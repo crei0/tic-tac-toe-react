@@ -15,19 +15,29 @@ class Board extends React.Component {
     this.resetGrid();
   }
 
+  /**
+   * Resets the grid
+   */
   resetGrid = () => {
     this.setState(
       resetGridState()
     );
   }
 
+  /**
+   * Handles the clicks on the cells, and updates the state
+   * 
+   * @param {Number} x The x-axis position for the clicked cell
+   * @param {Number} y The y-axis position for the clicked cell
+   */
   handleCellClick = (x, y) => {
     const {
       grid,
-      currentPlayer
+      currentPlayer,
+      gameState
     } = this.state;
     
-    if (GAME_STATE.PLAYING) {
+    if (gameState === GAME_STATE.PLAYING) {
       if (grid[y][x] === CELL_VALUES.EMPTY) {
         grid[y][x] = currentPlayer;
   
@@ -36,7 +46,7 @@ class Board extends React.Component {
             grid: grid,
             gameState: GAME_STATE.PLAYER_WON
           });
-        } if (checkIfGameIsTied(grid)) {
+        } else if (checkIfGameIsTied(grid)) {
           this.setState({
             grid: grid,
             gameState: GAME_STATE.TIE
@@ -44,10 +54,7 @@ class Board extends React.Component {
         } else {
           this.setState({
             grid: grid,
-            currentPlayer: 
-              currentPlayer === PLAYER.X
-                ? PLAYER.O
-                : PLAYER.X
+            currentPlayer: currentPlayer === PLAYER.X ? PLAYER.O : PLAYER.X
           });
         }
       }
@@ -55,6 +62,11 @@ class Board extends React.Component {
 
   };
 
+  /**
+   * Just renders the Board structure
+   * 
+   * @param {Array} grid The Grid's array
+   */
   renderBoardStructure = (grid) => {
     return grid.map((row, rowIndex) =>
       <div className="row" key={`row-${rowIndex}`}>

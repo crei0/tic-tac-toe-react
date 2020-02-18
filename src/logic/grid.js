@@ -1,7 +1,8 @@
-import { CELL_VALUES, PLAYER } from '../enums/board';
+import { CELL_VALUES, PLAYER, GAME_STATE } from '../enums/board';
 
 /**
  * Resets the grid and makes Player X the current player
+ * 
  * @returns {Object}
  */
 export const resetGridState = () => (
@@ -11,10 +12,19 @@ export const resetGridState = () => (
       [CELL_VALUES.EMPTY,  CELL_VALUES.EMPTY,   CELL_VALUES.EMPTY],
       [CELL_VALUES.EMPTY,  CELL_VALUES.EMPTY,   CELL_VALUES.EMPTY]
     ],
-    currentPlayer: PLAYER.X
+    currentPlayer: PLAYER.X,
+    gameState: GAME_STATE.PLAYING
   }
 );
 
+/**
+ * Checks if the three cells (passed as arguments) are all the same
+ * 
+ * @param {String} cell1 The first cell to be checked
+ * @param {String} cell2 The second cell to be checked
+ * @param {String} cell3 The last cell to be checked
+ * @returns {Boolean}
+ */
 const _checkThreeCells = (cell1, cell2, cell3) => {
   return cell1 === cell2 &&
          cell1 === cell3 &&
@@ -32,8 +42,6 @@ const _checkThreeCells = (cell1, cell2, cell3) => {
  * @returns {Boolean}
  */
 export const checkIfPlayerWon = (grid) => {
-  console.info('checkIfPlayerWon', grid);
-
   for (let index = 0; index < 3; index++) {
     // Rows
     if (_checkThreeCells(grid[index][0], grid[index][1], grid[index][2])) {
@@ -60,10 +68,13 @@ export const checkIfPlayerWon = (grid) => {
 /**
  * Checks if the game is Tied
  * 
- * @param {Array} grid The grid array
+ * @param {Array} grid The Grid's array
  * @returns {Boolean}
  */
 export const checkIfGameIsTied = (grid) => {
-  const test = grid.flat(2).toString().indexOf();
-  console.info(test);
+  // Flatten and convert to String, then check if there's an empty cell
+  return grid
+    .flat(2)
+    .toString()
+    .indexOf(CELL_VALUES.EMPTY) === -1;
 };
