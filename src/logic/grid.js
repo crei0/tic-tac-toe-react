@@ -63,6 +63,8 @@ export const checkIfPlayerWon = (grid) => {
   if (_checkThreeCells(grid[2][0], grid[1][1], grid[0][2])) {
     return true;
   }
+
+  return false;
 };
 
 /**

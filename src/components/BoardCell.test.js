@@ -31,7 +31,7 @@ describe('BoardCell', () => {
         x={0}
         value={CELL_VALUES.EMPTY}
         clickHandler={mockCallBack}
-        />
+      />
     ));
     boardCell.find('button').simulate('click');
     
