@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Board's cell
+ */
 class BoardCell extends React.Component {
 
   handleClick = () => {
@@ -16,17 +19,19 @@ class BoardCell extends React.Component {
     const {
       value
     } = this.props;
-    
 
+    console.info("BoardCell", value !== '-')
     return (
-      <button onClick={this.handleClick}>
+      <button 
+        onClick={this.handleClick}
+        disabled={value !== '-'}
+        type="button"
+        className="btn btn-light">
         {value}
       </button>
     );
   }
 }
-
-// TODO: Document props
 
 BoardCell.propTypes = {
   /**
