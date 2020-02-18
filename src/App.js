@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './App.css';
+
 import Board from './components/Board'
 
 
@@ -13,7 +14,7 @@ function App() {
         </h1>
       </header>
       <main>
-        <Board></Board>
+        <Board />
       </main>
     </div>
   );
